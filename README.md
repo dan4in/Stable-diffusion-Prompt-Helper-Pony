@@ -4,6 +4,11 @@
 3. seperating Tags SFW/NSFW in a special toggle/button
 4. sending to webui TXT2Image
 5. Fully offline
-![preview](https://github.com/dan4in/Random-Danbooru-Tags-Generator-Pony/assets/53431991/08818354-4a52-49c9-8038-ab11e99c092e)
+
+score_9, score_8_up, score_7_up, score_6_up, score_5_up, score_4_up, nontraditional_miko, against_wall, kongou_(kancolle), dark_skin, black_nails, silk, rating_safe
+![00037-1171490274](https://github.com/dan4in/Random-Danbooru-Tags-Generator-Pony/assets/53431991/415b402e-f2b1-426e-9560-78f6148f220f)
+![00038-4088728158](https://github.com/dan4in/Random-Danbooru-Tags-Generator-Pony/assets/53431991/25981b30-6502-4963-978b-eaa2097e408d)
+
+
 ![preview3](https://github.com/dan4in/Random-Danbooru-Tags-Generator-Pony/assets/53431991/a399ffd7-d52f-4963-9877-654752da4737)
-![preview2](https://github.com/dan4in/Random-Danbooru-Tags-Generator-Pony/assets/53431991/190fdb6d-78ae-4fec-abf4-8268490365b4)
+
