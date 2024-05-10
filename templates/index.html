@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Danbooru Tags Generator</title>
+    <style>
+        /* Add CSS code to style the form elements */
+        body {
+            text-align: center; /* Center-align all content */
+        }
+
+        .container {
+            display: flex; /* Use flexbox to align the elements side by side */
+            justify-content: space-around; /* Add space around the elements */
+            align-items: flex-start; /* Align items at the start */
+        }
+
+        form {
+            display: inline-block; /* Make the form inline-block to center it */
+            margin: -30px auto;
+            padding: 19px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 400px;
+            text-align: left; /* Left-align form elements */
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        input[type="number"] {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .checkbox-group {
+            display: inline-block;
+            margin-right: 20px;
+        }
+
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+
+        .tags-box {
+            width: 500px; /* Adjust width as needed */
+            height: 300px; /* Adjust height as needed */
+            margin: 20px auto;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            overflow-y: scroll;
+            text-align: left;
+            /* Colorful border animation */
+            animation: border-color-change 5s infinite alternate;
+        }
+          #character-container {
+            margin-top: 50px;
+        }
+        
+        /* CSS for the Generate Character Tag button */
+#generate-character-button {
+    background-color: cyan; /* Change button color to cyan */
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-bottom: 10px; /* Add some margin below the button */
+}
+
+/* CSS for the character tags box */
+.characters-tags-box {
+            width: 500px; /* Adjust width as needed */
+            margin: -400px auto; /* Adjust margin to move closer to DanBooru tags box */
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            overflow-y: scroll;
+            text-align: left;
+		 /* Colorful border animation */
+            animation: border-color-change 5s infinite alternate;
+        }
+
+/* Adjust spacing between the character tags box and the Generate Character Tag button */
+#character-container {
+    margin-top: 20px; /* Add margin-top to separate from Danbooru tags box */
+}
+
+        /* Keyframes for border color change */
+        @keyframes border-color-change {
+            0% { border: 2px solid #ff0000; } /* Red */
+            25% { border: 2px solid #00ff00; } /* Green */
+            50% { border: 2px solid #0000ff; } /* Blue */
+            75% { border: 2px solid #ffff00; } /* Yellow */
+            100% { border: 2px solid #ff00ff; } /* Magenta */
+        }
+    </style>
+</head>
+<body>
+    <h1>♥ Random Danbooru Tags Generator ♥</h1>
+	<h3>Note: The tags contain some "NSFW" use with caution 😜<h3>
+	                <h3>(づ｡◕‿‿◕｡)づ<h3>
+
+    <div class="container">
+        <form action="/" method="post">
+            <label for="num_words">Number of DanBooru Tags:</label>
+            <input type="number" id="num_words" name="num_words" min="1" max="50" required value="{{ form_values.get('num_words', '') }}">
+            <br>
+				    <label for="generate_character">Pony models scores checkboxes:</label>
+    <div class="checkbox-group">
+        <input type="checkbox" id="Pony_score" name="Pony_score" {% if form_values.get('Pony_score') == 'on' %}checked{% endif %}>
+        <label for="Pony_score">Include Pony_score🌈</label>
+    </div>
+    <div class="checkbox-group">
+        <input type="checkbox" id="rating_safe" name="rating_safe" {% if form_values.get('rating_safe') == 'on' %}checked{% endif %}>
+        <label for="rating_safe">Include Rating Safe✨</label>
+    </div>
+    <div class="checkbox-group">
+        <input type="checkbox" id="rating_explicit" name="rating_explicit" {% if form_values.get('rating_explicit') == 'on' %}checked{% endif %}>
+        <label for="rating_explicit">Include Rating Explicit🔞</label>
+    </div>
+    <div class="checkbox-group">
+        <input type="checkbox" id="rating_questionable" name="rating_questionable" {% if form_values.get('rating_questionable') == 'on' %}checked{% endif %}>
+        <label for="rating_questionable">Include Rating Questionable🧐</label>
+    </div>
+    <!-- Repeat for other checkboxes -->
+    <div class="checkbox-group">
+        <input type="checkbox" id="source_pony" name="source_pony" {% if form_values.get('source_pony') == 'on' %}checked{% endif %}>
+        <label for="source_pony">Include Source Pony🦄</label>
+    </div>
+    <div class="checkbox-group">
+        <input type="checkbox" id="source_furry" name="source_furry" {% if form_values.get('source_furry') == 'on' %}checked{% endif %}>
+        <label for="source_furry">Include Source Furry🦊</label>
+    </div>
+    <div class="checkbox-group">
+        <input type="checkbox" id="source_cartoon" name="source_cartoon" {% if form_values.get('source_cartoon') == 'on' %}checked{% endif %}>
+        <label for="source_cartoon">Include Source Cartoon📺</label>
+    </div>
+    <div class="checkbox-group">
+        <input type="checkbox" id="source_anime" name="source_anime" {% if form_values.get('source_anime') == 'on' %}checked{% endif %}>
+        <label for="source_anime">Include Source Anime⛩️🌸</label>
+    </div>
+            <br><br>
+				<!-- Display CFG scale and sampling steps -->
+				<!-- Add these elements somewhere in your HTML -->
+    <h3 id="cfg-scale">CFG Scale: </h3>
+    <h3 id="sampling-steps">Sampling Steps: </h3>
+            <input type="submit" id="generate-tags-button" value="Generate Tags(≧ヮ≦) 💕">
+        <input type="button" id="generate-character-button" value="Generate Character Tag">
+	    <label for="generate_tags">mixed Tags Total: 9960:</label>
+		<label for="generate_tags">characters Tags Total: 2020:</label>
+        </form>
+        <div class="tags-box">
+            <h2>Generated danBooru Tags:</h2>
+            <p>{{ result }}</p>
+        </div>
+    </div>
+<div class="container" id="character-container">
+    <form id="characters-form" action="/generate-characters" method="post">
+        <input type="hidden" name="num_words" value="{{ form_values.get('num_words', '') }}">
+        <input type="hidden" name="num_words_characters" value="1">
+
+    </form>
+    <!-- Moved below the form -->
+    <div class="characters-tags-box" id="characters-tags-box">
+        <h2>Generated Character Tag:</h2>
+        <p>{{ characters_result }}</p>
+    </div>
+</div>
+
+
+
+	
+	        <!-- Joke that only appears if the explicit rating is selected -->
+    {% if form_values.get('rating_explicit') == 'on' %}
+        <div class="container">
+            <div class="joke">
+                <h3>⋆⭒˚.¯👀⋆ඞ sussybAkA ඞ👀⋆⭒˚.¯</h3>
+            </div>
+        </div>
+    {% endif %}
+	
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function(){
+        $("#generate-tags-button").click(function(e){
+            e.preventDefault();
+            $.ajax({
+                url: '/generate-characters',  // the endpoint
+                type: 'POST',  // http method
+                data: $('form').serialize(),  // data sent with the post request
+
+                // handle a successful response
+                success: function(response){
+                    // update your page with the response
+                },
+
+                // handle a non-successful response
+                error: function(error){
+                    console.log(error);
+                }
+            });
+        });
+    });
+
+
+
+
+$(document).ready(function(){
+    $("#generate-tags-button").click(function(e){
+        e.preventDefault();
+        $.ajax({
+            url: '/generate-tags',
+            type: 'POST',
+            data: $('form').serialize(),
+            success: function(response){
+                // Update the tags box with the generated tags
+                $('.tags-box p').text(response.tags_result);
+            },
+            error: function(error){
+                console.log(error);
+            }
+        });
+
+        // Fetch updated CFG scale and sampling steps
+        fetch('/generate-random-values')
+            .then(response => response.json())
+            .then(data => {
+                // Update the CFG scale and sampling steps elements in the HTML
+                $('#cfg-scale').text("CFG Scale: " + data.cfg);
+                $('#sampling-steps').text("Sampling Steps: " + data.steps);
+            })
+            .catch(error => console.error('Error:', error));
+    });
+});
+    // JavaScript function to handle the response and update the character tags box
+    document.addEventListener('DOMContentLoaded', function() {
+        const charactersForm = document.getElementById('characters-form');
+        const charactersTagsBox = document.getElementById('characters-tags-box');
+        const generateCharacterButton = document.getElementById('generate-character-button');
+
+        generateCharacterButton.addEventListener('click', function() {
+            fetch(charactersForm.getAttribute('action'), {
+                method: 'POST',
+                body: new FormData(charactersForm)
+            })
+            .then(response => response.json())
+            .then(data => {
+                charactersTagsBox.innerHTML = ''; // Clear existing content
+                const p = document.createElement('p');
+                p.textContent = data.characters_result; // Set text content to the generated character tags
+                charactersTagsBox.appendChild(p); // Append the <p> element to the character tags box
+            })
+            .catch(error => console.error('Error:', error));
+        });
+
+        // Prevent default form submission
+        charactersForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+        });
+    });
+
+	// Function to handle form submission and display generated tags
+function handleFormSubmit(form, resultElement) {
+    form.addEventListener('submit', function(event) {
+        event.preventDefault(); // Prevent default form submission
+
+        // Send a POST request to the form's action URL
+        fetch(form.action, {
+            method: 'POST',
+            body: new FormData(form)
+        })
+        .then(response => response.json())
+        .then(data => {
+            // Update the result element with the generated tags
+            resultElement.textContent = data.result || data.characters_result;
+        })
+        .catch(error => console.error('Error:', error));
+    });
+}
+
+// Get the forms and result elements
+const tagsForm = document.getElementById('tags-form');
+const charactersForm = document.getElementById('characters-form');
+const tagsResult = document.getElementById('tags-result');
+const charactersResult = document.getElementById('characters-result');
+
+// Handle form submission for generating DanBooru tags
+handleFormSubmit(tagsForm, tagsResult);
+
+// Handle form submission for generating character tags
+handleFormSubmit(charactersForm, charactersResult);
+		
+        // Add JavaScript code to validate the form input
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.querySelector('form');
+
+            form.addEventListener('submit', function(event) {
+                const numWordsInput = document.getElementById('num_words');
+                const numWords = parseInt(numWordsInput.value);
+
+                if (isNaN(numWords) || numWords < 1 || numWords > 50) {
+                    alert('Please enter a valid number of DanBooru tags (1-50).');
+                    event.preventDefault(); // Prevent form submission
+                }
+            });
+        });
+    </script>
+</body>
+</html>
