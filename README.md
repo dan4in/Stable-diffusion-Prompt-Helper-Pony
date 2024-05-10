@@ -1,7 +1,7 @@
 **Things working on 
 1.  ✅Adding more tags 100%done
 2.  ✅Adding characters only suggestion's
-3. seperating Tags SFW/NSFW in a special toggle/button 20%
+3. seperating Tags SFW/NSFW in a special toggle/button 80%
 4. sending to webui TXT2Image 0%
 5.  ✅Fully offline
 6. Adding seperate categories 35%
