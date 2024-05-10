@@ -1,9 +1,9 @@
 **Things working on 
-1. Adding more tags
-2. Adding characters only suggestion's
+1. Adding more tags 30%done
+2.  ✅Adding characters only suggestion's
 3. seperating Tags SFW/NSFW in a special toggle/button
 4. sending to webui TXT2Image
-5. Fully offline
+5.  ✅Fully offline
 
 score_9, score_8_up, score_7_up, score_6_up, score_5_up, score_4_up, nontraditional_miko, against_wall, kongou_(kancolle), dark_skin, black_nails, silk, rating_safe
 ![00037-1171490274](https://github.com/dan4in/Random-Danbooru-Tags-Generator-Pony/assets/53431991/415b402e-f2b1-426e-9560-78f6148f220f)
