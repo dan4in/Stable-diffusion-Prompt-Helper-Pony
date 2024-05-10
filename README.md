@@ -20,5 +20,6 @@ score_9, score_8_up, score_7_up, score_6_up, score_5_up, score_4_up, ambiguous_g
 .
 .
 
-![preview3](https://github.com/dan4in/Random-Danbooru-Tags-Generator-Pony/assets/53431991/a399ffd7-d52f-4963-9877-654752da4737)
+![image](https://github.com/dan4in/Random-Danbooru-Tags-Generator-Pony/assets/53431991/dad81aa0-783b-4eac-86dc-efc252598d57)
+
 
