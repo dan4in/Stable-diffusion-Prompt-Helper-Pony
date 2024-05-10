@@ -1,8 +1,8 @@
 **Things working on 
-1. Adding more tags 30%done
+1.  ✅Adding more tags 100%done
 2.  ✅Adding characters only suggestion's
-3. seperating Tags SFW/NSFW in a special toggle/button
-4. sending to webui TXT2Image
+3. seperating Tags SFW/NSFW in a special toggle/button %20
+4. sending to webui TXT2Image 0%
 5.  ✅Fully offline
 
 score_9, score_8_up, score_7_up, score_6_up, score_5_up, score_4_up, nontraditional_miko, against_wall, kongou_(kancolle), dark_skin, black_nails, silk, rating_safe
