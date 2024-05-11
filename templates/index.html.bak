@@ -197,7 +197,7 @@
             <p>{{ result }}</p>
         </div>
     </div>
-<div class="container" id="character-container">
+
     <form id="characters-form" action="/generate-characters" method="post">
         <input type="hidden" name="num_words" value="{{ form_values.get('num_words', '') }}">
         <input type="hidden" name="num_words_characters" value="1">
