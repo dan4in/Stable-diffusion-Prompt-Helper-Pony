@@ -18,6 +18,8 @@ tags = {
     'copyright': read_tags_from_file('Copyright'),
     'artist': read_tags_from_file('Artist'),
     'nsfw': read_tags_from_file('NSFW'),
+    'meta': read_tags_from_file('meta'),
+    'hair': read_tags_from_file('hair'),
 }
 
 def generate_words(num_words, pony_options, category):
@@ -48,6 +50,8 @@ def generate_words(num_words, pony_options, category):
         result += ', rating_explicit'
     if pony_options.get('rating_questionable', False):
         result += ', rating_questionable'
+    if pony_options.get('rating_realistic', False):
+        result += ', score_hyper-realistic, realistic, ((Full Body:1.2))'
     
     # Include selected source options
     for word, selected in pony_options.items():

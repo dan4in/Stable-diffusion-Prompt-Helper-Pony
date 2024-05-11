@@ -135,6 +135,8 @@
         <option value="copyright">Copyright</option>
         <option value="artist">Artist</option>
         <option value="nsfw">NSFW</option>
+		<option value="hair">Hair</option>
+		<option value="meta">Meta</option>
     </select>
 	
 				    <label for="generate_character">Pony models scores checkboxes:</label>
@@ -175,6 +177,10 @@
     <input type="checkbox" id="undanbooru_tags" name="undanbooru_tags" {% if form_values.get('undanbooru_tags') == 'on' %}checked{% endif %}>
     <label for="undanbooru_tags">Include Clean danbooru Tags🧹😎</label>
 </div>
+	<div class="checkbox-group">
+    <input type="checkbox" id="rating_realistic" name="rating_realistic" {% if form_values.get('rating_realistic') == 'on' %}checked{% endif %}>
+    <label for="undanbooru_tags">Include rating_realistic_fullbody😎</label>
+</div>
             <br><br>
 				<!-- Display CFG scale and sampling steps -->
 				<!-- Add these elements somewhere in your HTML -->
@@ -191,6 +197,7 @@
 		<label for="generate_tags">Accessory Tags Total: 1,626:</label>
 		<label for="generate_tags">NSFW Tags Total: 846:</label>
 		<label for="generate_tags">Meta Tags Total: 618:</label>
+		<label for="generate_tags">Hair Tags Total: 454:</label>
         </form>
         <div class="tags-box">
             <h2>Generated danBooru Tags:</h2>
