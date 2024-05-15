@@ -20,6 +20,7 @@ tags = {
     'nsfw': read_tags_from_file('NSFW'),
     'meta': read_tags_from_file('meta'),
     'hair': read_tags_from_file('hair'),
+    'Age': read_tags_from_file('Age'),
 }
 
 def generate_words(num_words, pony_options, category):
@@ -100,7 +101,19 @@ def generate_characters():
     num_words = request.form.get('num_words', '1')  # Default to 1 if num_words is not provided
     pony_options = {key: True if request.form.get(key) == 'on' else False for key in request.form.keys()}
     characters_result = generate_words(1, pony_options, 'characters')  # Always generate one character tag
-    return jsonify(characters_result=characters_result, num_words=num_words, form_values=request.form)
+    return jsonify(characters_tags_result=characters_result, num_words=num_words, form_values=request.form)
 
+@app.route('/generate-mixed-tags', methods=['POST'])
+def generate_mixed_tags():
+    pony_options = {key: True if request.form.get(key) == 'on' else False for key in request.form.keys()}
+    mixed_tags_result = {category: generate_words(1, pony_options, category) for category in tags.keys()}
+    
+    # Remove category names and format the tags without {" and :
+    cleaned_tags_result = {key: value.replace('"', '').replace(':', '') for key, value in mixed_tags_result.items()}
+    
+    return jsonify(mixed_tags_result=cleaned_tags_result)
+
+
+    
 if __name__ == '__main__':
     app.run(debug=True)
