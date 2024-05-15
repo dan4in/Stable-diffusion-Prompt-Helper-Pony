@@ -4,7 +4,7 @@
 3.  ✅seperating Tags SFW/NSFW in a special toggle/button 99%done
 4. sending to webui TXT2Image 0%
 5.  ✅Fully offline
-6.  ✅Adding seperate categories 90%done
+6.  ✅Adding seperate categories 99%done
 
 
    .previews
