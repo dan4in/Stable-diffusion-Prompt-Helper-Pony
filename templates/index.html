@@ -5,26 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Random Danbooru Tags Generator</title>
     <style>
-        /* Add CSS code to style the form elements */
         body {
-            text-align: center; /* Center-align all content */
+            text-align: center;
         }
 
         .container {
-            display: flex; /* Use flexbox to align the elements side by side */
-            justify-content: space-around; /* Add space around the elements */
-            align-items: flex-start; /* Align items at the start */
+            display: flex;
+            justify-content: space-around;
+            align-items: flex-start;
         }
 
         form {
-            display: inline-block; /* Make the form inline-block to center it */
+            display: inline-block;
             margin: -100px auto;
             padding: 19px;
             border: 8px solid #ccc;
             border-radius: 5px;
             width: 400px;
-            text-align: center; /* Left-align form elements */
-		    /* Colorful border animation */
+            text-align: center;
             animation: border-color-change 5s infinite alternate;
         }
 
@@ -46,87 +44,89 @@
             margin-right: 20px;
         }
 
-        input[type="submit"] {
+        input[type="submit"], input[type="button"] {
             background-color: #4CAF50;
             color: white;
             padding: 10px 20px;
             border: none;
             border-radius: 5px;
             cursor: pointer;
-			
         }
 
-        input[type="submit"]:hover {
+        input[type="submit"]:hover, input[type="button"]:hover {
             background-color: #45a049;
         }
 
-        .tags-box {
-            width: 500px; /* Adjust width as needed */
-            height: 300px; /* Adjust height as needed */
-            margin: 20px auto;
+        .tags-box, .characters-tags-box, .mixed-tags-box {
+            width: 600px;
+            height: 300px;
+            margin: 50px auto;
             padding: 10px;
             border: 1px solid #ccc;
             border-radius: 5px;
             overflow-y: scroll;
             text-align: left;
-            /* Colorful border animation */
-            animation: border-color-change 5s infinite alternate;
-        }
-          #character-container {
-            margin-top: 50px;
-        }
-        
-        /* CSS for the Generate Character Tag button */
-#generate-character-button {
-    background-color: cyan; /* Change button color to cyan */
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    margin-bottom: 10px; /* Add some margin below the button */
-}
-
-/* CSS for the character tags box */
-.characters-tags-box {
-            width: 500px; /* Adjust width as needed */
-            margin: -650px auto; /* Adjust margin to move closer to DanBooru tags box */
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            overflow-y: scroll;
-            text-align: left;
-		 /* Colorful border animation */
             animation: border-color-change 5s infinite alternate;
         }
 
-/* Adjust spacing between the character tags box and the Generate Character Tag button */
-#character-container {
-    margin-top: 20px; /* Add margin-top to separate from Danbooru tags box */
-}
+        #character-container, #mixed-tags-container {
+            margin-top: 20px;
+        }
 
-        /* Keyframes for border color change */
         @keyframes border-color-change {
-            0% { border: 2px solid #ff0000; } /* Red */
-            25% { border: 2px solid #00ff00; } /* Green */
-            50% { border: 2px solid #0000ff; } /* Blue */
-            75% { border: 2px solid #ffff00; } /* Yellow */
-            100% { border: 2px solid #ff00ff; } /* Magenta */
+            0% { border: 2px solid #ff0000; }
+            25% { border: 2px solid #00ff00; }
+            50% { border: 2px solid #0000ff; }
+            75% { border: 2px solid #ffff00; }
+            100% { border: 2px solid #ff00ff; }
         }
+
+        #generate-mixed-tags-button {
+            background-color: cyan;
+            color: red;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-bottom: 10px;
+        }
+		#generate-character-button {
+            background-color: blue;
+            color: black;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+	
+    @keyframes text-color-change {
+    0% { color: #ff0000; }
+    25% { color: #00ff00; }
+    50% { color: #0000ff; }
+    75% { color: #ffff00; }
+    100% { color: #ff00ff; }
+}
+
+#special-heading {
+    animation: text-color-change 10s infinite; /* Adjust the duration as needed */
+}
+
+
     </style>
 </head>
 <body>
     <h1>♥ Random Danbooru Tags Generator ♥</h1>
 	<h3>Note: The tags contain some "NSFW" use with caution 😜<h3>
-	                <h3>(づ｡◕‿‿◕｡)づ<h3>
+	       <h2 id="special-heading">(づ｡◕‿‿◕｡)づ</h2>
 
     <div class="container">
         <form action="/" method="post">
-            <label for="num_words">Number of DanBooru Tags:</label>
+            <label for="num_words">Select Number of DanBooru Tags First:</label>
+			<h5> max "50"</h5>
             <input type="number" id="num_words" name="num_words" min="1" max="50" required value="{{ form_values.get('num_words', '') }}">
            
 		   <!-- Add a dropdown menu to select the category of tags -->
-    <label for="category">Category:</label>
+    <label for="category" id="special-heading">Category:</label>
     <select id="category" name="category">
         <option value="general">General</option>
         <option value="characters">Characters</option>
@@ -136,6 +136,7 @@
         <option value="artist">Artist</option>
         <option value="nsfw">NSFW</option>
 		<option value="hair">Hair</option>
+		<option value="Age">Age</option>
 		<option value="meta">Meta</option>
     </select>
 	
@@ -181,45 +182,55 @@
     <input type="checkbox" id="rating_realistic" name="rating_realistic" {% if form_values.get('rating_realistic') == 'on' %}checked{% endif %}>
     <label for="undanbooru_tags">Include rating_realistic_fullbody😎</label>
 </div>
+
             <br><br>
 				<!-- Display CFG scale and sampling steps -->
 				<!-- Add these elements somewhere in your HTML -->
     <h3 id="cfg-scale">CFG Scale: </h3>
     <h3 id="sampling-steps">Sampling Steps: </h3>
-            <input type="submit" id="generate-tags-button" value="Generate Tags(≧ヮ≦) 💕">
-        <input type="button" id="generate-character-button" value="Generate Character Tag">
-	    <label for="generate_tags">Total Tags: 81,053:</label>
+	<!-- Form for the "Generate Tags" button -->
+<form id="tags-form" action="/" method="post">
+ <!-- Your form fields here -->
+    <input type="submit" id="generate-tags-button" value="Generate Tags(≧ヮ≦) 💕">
+
+<!-- Form for the "Generate Character Tag" button -->
+<form id="characters-form" action="/generate-characters" method="post">
+    <!-- Your form fields here -->
+            <input type="button" id="generate-character-button" value="Generate Character Tags">
+            <input type="button" id="generate-mixed-tags-button" value="Generate Mixed Tags">
+	    <label for="generate_tags" id="special-heading">Total Tags: 82,255:</label>
 		<label for="generate_tags">Artist Tags Total: 20,034:</label>
 		<label for="generate_tags">characters Tags Total: 20,026:</label>
 		<label for="generate_tags">Copyright Tags Total: 20,000:</label>
 		<label for="generate_tags">General Tags Total: 15,468:</label>
-		<label for="generate_tags">clothes Tags Total: 2,435:</label>
-		<label for="generate_tags">Accessory Tags Total: 1,626:</label>
-		<label for="generate_tags">NSFW Tags Total: 846:</label>
+		<label for="generate_tags">clothes Tags Total: 2,921:</label>
+		<label for="generate_tags">Accessory Tags Total: 2,081:</label>
+		<label for="generate_tags">NSFW Tags Total: 1,000:</label>
+		<label for="generate_tags">Hair Tags Total: 700:</label>
 		<label for="generate_tags">Meta Tags Total: 618:</label>
-		<label for="generate_tags">Hair Tags Total: 454:</label>
+	    <label for="generate_tags">Age Tags Total: 395:</label>
         </form>
-        <div class="tags-box">
-            <h2>Generated danBooru Tags:</h2>
-            <p>{{ result }}</p>
+    <div class="container">
+        <div class="tags-container">
+            <div class="tags-box">
+                <h2>Generated Tags:</h2>
+                <p id="tags-result"></p>
+            </div>
+            <div class="characters-tags-box">
+                <h2>Character Tags:</h2>
+                <p id="characters-tags-result"></p>
+            </div>
+
+            <div class="mixed-tags-box" id="mixed-tags-box">
+                <h2>Generated Mixed Tags from Category list:</h2>
+                <p id="mixed-tags-result"></p>
+            </div>
+			<h2>the mixed button will generate 1 Tag from each Category</h2>
+			<h2>"accessory","artist","characters","clothes","copyright","general","hair","meta","nsfw","Age"</h2>
         </div>
     </div>
-<div class="container" id="character-container">
-    <form id="characters-form" action="/generate-characters" method="post">
-        <input type="hidden" name="num_words" value="{{ form_values.get('num_words', '') }}">
-        <input type="hidden" name="num_words_characters" value="1">
-
-    </form>
-    <!-- Moved below the form -->
-    <div class="characters-tags-box" id="characters-tags-box">
-        <h2>Generated Character Tag:</h2>
-        <p>{{ characters_result }}</p>
-    </div>
-</div>
 
 
-
-	
 	        <!-- Joke that only appears if the explicit rating is selected -->
     {% if form_values.get('rating_explicit') == 'on' %}
         <div class="container">
@@ -229,32 +240,57 @@
         </div>
     {% endif %}
 	
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script>
-    $(document).ready(function(){
-        $("#generate-tags-button").click(function(e){
-            e.preventDefault();
-            $.ajax({
-                url: '/generate-characters',  // the endpoint
-                type: 'POST',  // http method
-                data: $('form').serialize(),  // data sent with the post request
-
-                // handle a successful response
-                success: function(response){
-                    // update your page with the response
-                },
-
-                // handle a non-successful response
-                error: function(error){
-                    console.log(error);
-                }
-            });
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function(){
+        $("#generate-mixed-tags-button").click(function(e){
+        e.preventDefault();
+        console.log("Generate Mixed Tags button clicked");
+        $.ajax({
+            url: '/generate-mixed-tags',
+            type: 'POST',
+            data: $('#mixed-tags-form').serialize(),
+            success: function(response){
+                console.log("Response received:", response);
+                var formattedTags = formatTags(response.mixed_tags_result);
+                $('#mixed-tags-result').text(formattedTags);
+            },
+            error: function(error){
+                console.log("Error occurred:", error);
+            }
         });
     });
 
+    // Function to format tags without category names and unnecessary symbols
+    function formatTags(tagsResult) {
+        var formattedTags = '';
+        for (var key in tagsResult) {
+            if (tagsResult.hasOwnProperty(key)) {
+                formattedTags += tagsResult[key].replace(/"|:/g, '') + ', ';
+            }
+        }
+        // Remove the trailing comma and space
+        formattedTags = formattedTags.slice(0, -2);
+        return formattedTags;
+    }
 
+            $("#generate-character-button").click(function(e){
+                e.preventDefault();
+                console.log("Generate Character Tags button clicked");
+                $.ajax({
+                    url: '/generate-characters',
+                    type: 'POST',
+                    success: function(response){
+                        console.log("Response received for character tags:", response);
+                        $('#characters-tags-result').text(JSON.stringify(response.characters_tags_result));
+                    },
+                    error: function(error){
+                        console.log("Error occurred for character tags:", error);
+                    }
+                });
+            });
 
-
+		
 $(document).ready(function(){
     $("#generate-tags-button").click(function(e){
     e.preventDefault();
@@ -328,6 +364,7 @@ function handleFormSubmit(form, resultElement) {
     });
 }
 
+
 // Get the forms and result elements
 const tagsForm = document.getElementById('tags-form');
 const charactersForm = document.getElementById('characters-form');
@@ -354,6 +391,7 @@ handleFormSubmit(charactersForm, charactersResult);
                 }
             });
         });
+    });
     </script>
 </body>
 </html>
