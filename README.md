@@ -6,7 +6,7 @@
 5.  ✅Fully offline
 6.  ✅Adding seperate categories 99%done
 
-
+video https://youtu.be/oa2t9uwrSKA
    .previews
    
 score_9, score_8_up, score_7_up, score_6_up, score_5_up, score_4_up, nontraditional_miko, against_wall, kongou_(kancolle), dark_skin, black_nails, silk, rating_safe
@@ -29,4 +29,5 @@ score_10,score_9_up,score_8_up,score_7_up, score_9, score_8_up, score_7_up, scor
 .
 .
 .
-![image](https://github.com/dan4in/Random-Danbooru-Tags-Generator-Pony/assets/53431991/fb923be8-02a1-496d-b364-ca8d9b53aa18)
+![image](https://github.com/dan4in/Random-Danbooru-Tags-Generator-Pony/assets/53431991/4ece34b2-3b05-4d1d-8183-cf40175260e8)
+
