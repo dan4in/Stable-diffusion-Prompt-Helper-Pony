@@ -12,6 +12,7 @@ def read_tags_from_file(filename):
 # Read tags from the text files
 tags = {
     'general': read_tags_from_file('General'),
+    'civitAI-Prompt': read_tags_from_file('civitAI-Prompt'),
     'characters': read_tags_from_file('Character'),
     'clothes': read_tags_from_file('clothes'),
     'accessory': read_tags_from_file('Accessory'),
@@ -21,14 +22,16 @@ tags = {
     'meta': read_tags_from_file('meta'),
     'hair': read_tags_from_file('hair'),
     'Age': read_tags_from_file('Age'),
+    'Poses': read_tags_from_file('Poses'),
+    'Backgrounds': read_tags_from_file('Backgrounds'),
+    'Lighting': read_tags_from_file('Lighting'),
 }
-
-def generate_words(num_words, pony_options, category):
+def generate_words(num_words, pony_options, category, clean_tags=False):
     selected_words = random.sample(tags[category], min(num_words, len(tags[category])))
     
-    # If "Undanbooru Tags" is selected, replace certain characters with a space in the tags
-    if pony_options.get('undanbooru_tags', False):
-        selected_words = [word.replace('_', ' ').replace('(', ' ').replace(')', ' ').replace('{', ' ').replace('}', ' ').replace('-', ' ').replace('!?', ' ').replace(';', ' ').replace('+', ' ').replace('=', ' ').replace('@', ' ').replace('^', ' ').replace('<', ' ').replace('>', ' ') for word in selected_words]
+    # If "Undanbooru Tags" is selected or clean_tags is True, replace certain characters with a space in the tags
+    if pony_options.get('undanbooru_tags', False) or clean_tags:
+        selected_words = [word.replace('_', ' ').replace('(', ' ').replace(')', ' ').replace('{', ' ').replace('}', ' ').replace('-', ' ').replace('!?', ' ').replace('&', ' ').replace('+', ' ').replace('=', ' ').replace('@', ' ').replace('^', ' ').replace('<', ' ').replace('>', ' ') for word in selected_words]
     
     result = ', '.join(selected_words)
     
@@ -52,7 +55,7 @@ def generate_words(num_words, pony_options, category):
     if pony_options.get('rating_questionable', False):
         result += ', rating_questionable'
     if pony_options.get('rating_realistic', False):
-        result += ', score_hyper-realistic, realistic, ((Full Body:1.2))'
+        result += ', score_hyper-realistic, realistic, ((Full Body:1.2)),Highly detailed RAW color Photo, toned body, ( ( (MASTERPIECE) ) ), ( ( (full body1.2) ) ), ( ( (wide angle) ) ),realistic eyes, detailed expression, wonderful, yellowish eyes, blushing, nose piercing, long eyelash, blue left eye, detailed pupils, detailed eyebrow, detailed lashes, detailed nose, detailed lips), dynamic lights, cinematic lighting, EMBEDDED GEMS, GLOW EYES, (highly detailed, hyperdetailed, intricate), (bloom:0.7), particle effects, raytracing, cinematic lighting, shallow depth of field, photographed on a Sony a9 II, 50mm wide angle lens, sharp focus, cinematic film still'
     
     # Include selected source options
     for word, selected in pony_options.items():
@@ -60,6 +63,11 @@ def generate_words(num_words, pony_options, category):
             result += ', ' + word
     
     return result
+    
+def static_image(filename):
+    return url_for('static', filename=f'images/{filename}.png')
+
+app.jinja_env.globals.update(static_image=static_image)
 
 @app.route('/generate-tags/<category>', methods=['POST'])
 def generate_tags(category):
@@ -98,22 +106,28 @@ def generate_random_values():
 
 @app.route('/generate-characters', methods=['POST'])
 def generate_characters():
-    num_words = request.form.get('num_words', '1')  # Default to 1 if num_words is not provided
+    num_words = request.form.get('num_words', '1')
     pony_options = {key: True if request.form.get(key) == 'on' else False for key in request.form.keys()}
-    characters_result = generate_words(1, pony_options, 'characters')  # Always generate one character tag
+    clean_tags = pony_options.get('undanbooru_tags', False)
+    print("Received pony_options:", pony_options)
+    print("Clean tags flag:", clean_tags)
+    characters_result = generate_words(1, pony_options, 'characters', clean_tags=clean_tags)
     return jsonify(characters_tags_result=characters_result, num_words=num_words, form_values=request.form)
 
 @app.route('/generate-mixed-tags', methods=['POST'])
 def generate_mixed_tags():
-    pony_options = {key: True if request.form.get(key) == 'on' else False for key in request.form.keys()}
-    mixed_tags_result = {category: generate_words(1, pony_options, category) for category in tags.keys()}
-    
-    # Remove category names and format the tags without {" and :
-    cleaned_tags_result = {key: value.replace('"', '').replace(':', '') for key, value in mixed_tags_result.items()}
-    
-    return jsonify(mixed_tags_result=cleaned_tags_result)
+    mixed_tags_options = {key: int(value) for key, value in request.form.items() if int(value) > 0}
+    print("Mixed Tags Options:", mixed_tags_options)
+    if mixed_tags_options.get('undanbooru_tags', False):
+        mixed_tags_options['undanbooru_tags'] = 1  # Ensure undanbooru_tags is set to 1 if selected
+    clean_tags = mixed_tags_options.get('undanbooru_tags', False)  # Check if clean_tags should be True
+    mixed_tags_result = {category: generate_words(value, mixed_tags_options, category, clean_tags=clean_tags) for category, value in mixed_tags_options.items() if category in tags}
+    return jsonify(mixed_tags_result=mixed_tags_result)  # Return mixed_tags_result
+
+@app.route('/')
+def static_image():
+    return render_template('index.html')
 
 
-    
 if __name__ == '__main__':
     app.run(debug=True)

@@ -7,12 +7,25 @@
     <style>
         body {
             text-align: center;
+			background-color: #121212; /* Dark gray background */
+            color: #E0E0E0; /* Light gray text for good contrast */
+			font-family: Arial, sans-serif;
+
         }
 
         .container {
             display: flex;
             justify-content: space-around;
             align-items: flex-start;
+        }
+
+        .dark-mode {
+            background-color: black;
+            color: white;
+        }
+        .light-mode {
+            background-color: white;
+            color: black;
         }
 
         form {
@@ -115,8 +128,14 @@
     </style>
 </head>
 <body>
+<img src="{{ url_for('static', filename='images/header.png') }}" alt="Header Image">
+
+
+
     <h1>♥ Random Danbooru Tags Generator ♥</h1>
 	<h3>Note: The tags contain some "NSFW" use with caution 😜<h3>
+		    <h2 id="special-heading">PROMPT HELPER</h2>
+		    <h5 id="DarkModetext">♥Dark Mode is ON♥</h5>
 	       <h2 id="special-heading">(づ｡◕‿‿◕｡)づ</h2>
 
     <div class="container">
@@ -127,8 +146,10 @@
            
 		   <!-- Add a dropdown menu to select the category of tags -->
     <label for="category" id="special-heading">Category:</label>
+	              <h5> Note: Set number of tags #1 for "CivitAI" prompt</h5>
     <select id="category" name="category">
         <option value="general">General</option>
+		<option value="civitAI-Prompt">civitAI-Prompt</option>
         <option value="characters">Characters</option>
         <option value="clothes">Clothes</option>
         <option value="accessory">Accessory</option>
@@ -137,6 +158,9 @@
         <option value="nsfw">NSFW</option>
 		<option value="hair">Hair</option>
 		<option value="Age">Age</option>
+		<option value="Lighting">Lighting</option>
+		<option value="Backgrounds">Backgrounds</option>
+		<option value="Poses">Poses</option>
 		<option value="meta">Meta</option>
     </select>
 	
@@ -180,7 +204,7 @@
 </div>
 	<div class="checkbox-group">
     <input type="checkbox" id="rating_realistic" name="rating_realistic" {% if form_values.get('rating_realistic') == 'on' %}checked{% endif %}>
-    <label for="undanbooru_tags">Include rating_realistic_fullbody😎</label>
+    <label for="realistic_tags">Quality Prompting 😎</label>
 </div>
 
             <br><br>
@@ -191,24 +215,28 @@
 	<!-- Form for the "Generate Tags" button -->
 <form id="tags-form" action="/" method="post">
  <!-- Your form fields here -->
-    <input type="submit" id="generate-tags-button" value="Generate Tags(≧ヮ≦) 💕">
+             <h1>Informations</h1>
 
 <!-- Form for the "Generate Character Tag" button -->
 <form id="characters-form" action="/generate-characters" method="post">
     <!-- Your form fields here -->
-            <input type="button" id="generate-character-button" value="Generate Character Tags">
-            <input type="button" id="generate-mixed-tags-button" value="Generate Mixed Tags">
-	    <label for="generate_tags" id="special-heading">Total Tags: 82,255:</label>
+
+
+	    <label for="generate_tags" id="special-heading">Total Tags: 84,971:</label>
 		<label for="generate_tags">Artist Tags Total: 20,034:</label>
 		<label for="generate_tags">characters Tags Total: 20,026:</label>
 		<label for="generate_tags">Copyright Tags Total: 20,000:</label>
 		<label for="generate_tags">General Tags Total: 15,468:</label>
 		<label for="generate_tags">clothes Tags Total: 2,921:</label>
-		<label for="generate_tags">Accessory Tags Total: 2,081:</label>
+		<label for="generate_tags">Accessory Tags Total: 2,171:</label>
+	    <label for="generate_tags">Poses Tags Total: 1075:</label>
+	    <label for="generate_tags">Backgrounds Tags Total: 1030:</label>
 		<label for="generate_tags">NSFW Tags Total: 1,000:</label>
 		<label for="generate_tags">Hair Tags Total: 700:</label>
 		<label for="generate_tags">Meta Tags Total: 618:</label>
 	    <label for="generate_tags">Age Tags Total: 395:</label>
+	    <label for="generate_tags">civitAI-Prompt Total: 301:</label>
+	    <label for="generate_tags">Lighting Total: 220:</label>
         </form>
     <div class="container">
         <div class="tags-container">
@@ -216,6 +244,8 @@
                 <h2>Generated Tags:</h2>
                 <p id="tags-result"></p>
             </div>
+			<input type="submit" id="generate-tags-button" value="Generate Tags(≧ヮ≦) 💕">
+			<input type="button" id="generate-character-button" value="Generate Character Tags">
             <div class="characters-tags-box">
                 <h2>Character Tags:</h2>
                 <p id="characters-tags-result"></p>
@@ -225,11 +255,84 @@
                 <h2>Generated Mixed Tags from Category list:</h2>
                 <p id="mixed-tags-result"></p>
             </div>
+			<input type="button" id="generate-mixed-tags-button" value="Generate Mixed Tags">
 			<h2>the mixed button will generate 1 Tag from each Category</h2>
-			<h2>"accessory","artist","characters","clothes","copyright","general","hair","meta","nsfw","Age"</h2>
-        </div>
+			<label for="mixed-tags-options">Mixed Tags Options:</label>
+			<h4>the sliders by default is set on 1 and max is = 5</h4>
+<div id="mixed-tags-options">
+    <div class="checkbox-group">
+        <input type="checkbox" id="mixed-general" name="mixed-general">
+        <label for="mixed-general">General</label>
+        <input type="range" id="general-slider" name="general-slider" min="1" max="5" value="1">
+    </div>
+    <div class="checkbox-group">
+        <input type="checkbox" id="mixed-characters" name="mixed-characters">
+        <label for="mixed-characters">Characters</label>
+        <input type="range" id="characters-slider" name="characters-slider" min="1" max="5" value="1">
+    </div>
+	    <div class="checkbox-group">
+        <input type="checkbox" id="mixed-clothes" name="mixed-clothes">
+        <label for="mixed-clothes">clothes</label>
+        <input type="range" id="clothes-slider" name="clothes-slider" min="1" max="5" value="1">
+    </div>
+	    <div class="checkbox-group">
+        <input type="checkbox" id="mixed-accessory" name="mixed-accessory">
+        <label for="mixed-accessory">accessory</label>
+        <input type="range" id="accessory-slider" name="accessory-slider" min="1" max="5" value="1">
+    </div>
+	    <div class="checkbox-group">
+        <input type="checkbox" id="mixed-copyright" name="mixed-copyright">
+        <label for="mixed-copyright">copyright</label>
+        <input type="range" id="copyright-slider" name="copyright-slider" min="1" max="5" value="1">
+    </div>
+	    <div class="checkbox-group">
+        <input type="checkbox" id="mixed-artist" name="mixed-artist">
+        <label for="mixed-artist">artist</label>
+        <input type="range" id="artist-slider" name="artist-slider" min="1" max="5" value="1">
+    </div>
+	    <div class="checkbox-group">
+        <input type="checkbox" id="mixed-nsfw" name="mixed-nsfw">
+        <label for="mixed-nsfw">nsfw</label>
+        <input type="range" id="nsfw-slider" name="nsfw-slider" min="1" max="5" value="1">
+    </div>
+	    <div class="checkbox-group">
+        <input type="checkbox" id="mixed-hair" name="mixed-hair">
+        <label for="mixed-hair">hair</label>
+        <input type="range" id="hair-slider" name="hair-slider" min="1" max="5" value="1">
+    </div>
+	    <div class="checkbox-group">
+        <input type="checkbox" id="mixed-Age" name="mixed-Age">
+        <label for="mixed-Age">Age</label>
+        <input type="range" id="Age-slider" name="Age-slider" min="1" max="5" value="1">
+    </div>
+	 <div class="checkbox-group">
+        <input type="checkbox" id="mixed-Backgrounds" name="mixed-Backgrounds">
+        <label for="mixed-Backgrounds">Backgrounds</label>
+        <input type="range" id="Backgrounds-slider" name="Backgrounds-slider" min="1" max="1" value="1">
+    </div>
+	 <div class="checkbox-group">
+        <input type="checkbox" id="mixed-Lighting" name="mixed-Lighting">
+        <label for="mixed-Lighting">Lighting</label>
+        <input type="range" id="Lighting-slider" name="Lighting-slider" min="1" max="2" value="1">
+    </div>
+	 <div class="checkbox-group">
+        <input type="checkbox" id="mixed-Poses" name="mixed-Poses">
+        <label for="mixed-Poses">Poses</label>
+        <input type="range" id="Poses-slider" name="Poses-slider" min="1" max="1" value="1">
+    </div>
+	    <div class="checkbox-group">
+        <input type="checkbox" id="mixed-meta" name="mixed-meta">
+        <label for="mixed-meta">meta</label>
+        <input type="range" id="meta-slider" name="meta-slider" min="1" max="5" value="1">
     </div>
 
+    <!-- Repeat for other categories -->
+</div>
+			<h2>"Some sliders only limited to 1 or 2"</h2>
+			<h5>General Negative Prompt: boring,text,signature,logo,watermark,low quality, bad quality, loose artifacts, grainy, blurry, long neck, closed eyes, (worst quality, low quality:1.3), bad-hands-5, badhandv4, epiCNegative, makeup, mole under eye, mole, logo, watermark, text, divine, God, Goddess, deity, (monochrome:1.3), (oversaturated:1.3), bad hands, lowers, 3d render, cartoon, long body, ((blurry)), duplicate, ((duplicate body parts)), (disfigured), (poorly drawn), (extra limbs), fused fingers, extra fingers, (twisted), malformed hands, ((((mutated hands and fingers)))), contorted, conjoined, ((missing limbs)), logo, signature, text, words, low res, boring, mutated, artifacts, bad art, gross, ugly, poor quality, low quality, missing asshole, missing legs, limbless, severed limbs, severed parts, legless, without hands, disabled, anime, cartoonish, 3dmax</h4>
+
+        </div>
+    </div>
 
 	        <!-- Joke that only appears if the explicit rating is selected -->
     {% if form_values.get('rating_explicit') == 'on' %}
@@ -244,22 +347,42 @@
     <script>
         $(document).ready(function(){
         $("#generate-mixed-tags-button").click(function(e){
-        e.preventDefault();
-        console.log("Generate Mixed Tags button clicked");
-        $.ajax({
-            url: '/generate-mixed-tags',
-            type: 'POST',
-            data: $('#mixed-tags-form').serialize(),
-            success: function(response){
-                console.log("Response received:", response);
-                var formattedTags = formatTags(response.mixed_tags_result);
-                $('#mixed-tags-result').text(formattedTags);
-            },
-            error: function(error){
-                console.log("Error occurred:", error);
-            }
-        });
+    e.preventDefault();
+    console.log("Generate Mixed Tags button clicked");
+
+    var mixedTagsOptions = {};
+    mixedTagsOptions['general'] = $('#mixed-general').is(":checked") ? $('#general-slider').val() : 0;
+    mixedTagsOptions['characters'] = $('#mixed-characters').is(":checked") ? $('#characters-slider').val() : 0;
+	    mixedTagsOptions['clothes'] = $('#mixed-clothes').is(":checked") ? $('#clothes-slider').val() : 0;
+    mixedTagsOptions['accessory'] = $('#mixed-accessory').is(":checked") ? $('#accessory-slider').val() : 0;
+	    mixedTagsOptions['artist'] = $('#mixed-artist').is(":checked") ? $('#artist-slider').val() : 0;
+    mixedTagsOptions['hair'] = $('#mixed-hair').is(":checked") ? $('#hair-slider').val() : 0;
+	    mixedTagsOptions['Age'] = $('#mixed-Age').is(":checked") ? $('#Age-slider').val() : 0;
+    mixedTagsOptions['meta'] = $('#mixed-meta').is(":checked") ? $('#meta-slider').val() : 0;
+	    mixedTagsOptions['copyright'] = $('#mixed-copyright').is(":checked") ? $('#copyright-slider').val() : 0;
+    mixedTagsOptions['nsfw'] = $('#mixed-nsfw').is(":checked") ? $('#nsfw-slider').val() : 0;
+	    mixedTagsOptions['Poses'] = $('#mixed-Poses').is(":checked") ? $('#Poses-slider').val() : 0;
+		mixedTagsOptions['Lighting'] = $('#mixed-Lighting').is(":checked") ? $('#Lighting-slider').val() : 0;
+		mixedTagsOptions['Backgrounds'] = $('#mixed-Backgrounds').is(":checked") ? $('#Backgrounds-slider').val() : 0;
+	mixedTagsOptions['undanbooru_tags'] = $('#undanbooru_tags').is(":checked") ? 1 : 0;  // Add 
+    // Add similar lines for other categories
+    console.log(mixedTagsOptions);
+    $.ajax({
+        url: '/generate-mixed-tags',
+        type: 'POST',
+        data: mixedTagsOptions,
+        success: function(response){
+            console.log("Response received:", response);
+            var formattedTags = formatTags(response.mixed_tags_result);
+            $('#mixed-tags-result').text(formattedTags);
+        },
+        error: function(error){
+            console.log("Error occurred:", error);
+        }
     });
+});
+
+
 
     // Function to format tags without category names and unnecessary symbols
     function formatTags(tagsResult) {
@@ -274,21 +397,36 @@
         return formattedTags;
     }
 
-            $("#generate-character-button").click(function(e){
-                e.preventDefault();
-                console.log("Generate Character Tags button clicked");
-                $.ajax({
-                    url: '/generate-characters',
-                    type: 'POST',
-                    success: function(response){
-                        console.log("Response received for character tags:", response);
-                        $('#characters-tags-result').text(JSON.stringify(response.characters_tags_result));
-                    },
-                    error: function(error){
-                        console.log("Error occurred for character tags:", error);
-                    }
-                });
-            });
+    $(document).ready(function() {
+    $("#generate-character-button").click(function(e) {
+        e.preventDefault();
+        console.log("Generate Character Tags button clicked");
+
+        // Capture the state of the 'undanbooru_tags' checkbox for character tags
+        var characterTagsOptions = {};
+        characterTagsOptions['num_words'] = $('#num_words').val();
+        characterTagsOptions['undanbooru_tags'] = $('#undanbooru_tags').is(":checked") ? 'on' : 'off';
+        console.log("Sending data for character tags:", characterTagsOptions);
+		console.log("Character Tags Options:", characterTagsOptions);
+
+
+        $.ajax({
+            url: '/generate-characters',
+            type: 'POST',
+            data: characterTagsOptions,
+            success: function(response) {
+                console.log("Response received for character tags:", response);
+                $('#characters-tags-result').text(response.characters_tags_result);
+            },
+            error: function(error) {
+                console.log("Error occurred for character tags:", error);
+            }
+        });
+    });
+});
+
+
+
 
 		
 $(document).ready(function(){
@@ -365,6 +503,7 @@ function handleFormSubmit(form, resultElement) {
 }
 
 
+	
 // Get the forms and result elements
 const tagsForm = document.getElementById('tags-form');
 const charactersForm = document.getElementById('characters-form');
