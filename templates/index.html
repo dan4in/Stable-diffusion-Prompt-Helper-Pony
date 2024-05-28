@@ -161,6 +161,8 @@
 		<option value="Lighting">Lighting</option>
 		<option value="Backgrounds">Backgrounds</option>
 		<option value="Poses">Poses</option>
+		<option value="Quality">Quality</option>
+		<option value="Tattoos">Tattoos</option>
 		<option value="meta">Meta</option>
     </select>
 	
@@ -221,22 +223,11 @@
 <form id="characters-form" action="/generate-characters" method="post">
     <!-- Your form fields here -->
 
+<label for="generate_tags" id="special-heading">Total Tags: {{ total_tags }}</label>
+{% for category, count in tag_counts.items() %}
+    <label for="generate_tags">{{ category.capitalize() }} Tags Total: {{ count }}</label>
+{% endfor %}
 
-	    <label for="generate_tags" id="special-heading">Total Tags: 84,971:</label>
-		<label for="generate_tags">Artist Tags Total: 20,034:</label>
-		<label for="generate_tags">characters Tags Total: 20,026:</label>
-		<label for="generate_tags">Copyright Tags Total: 20,000:</label>
-		<label for="generate_tags">General Tags Total: 15,468:</label>
-		<label for="generate_tags">clothes Tags Total: 2,921:</label>
-		<label for="generate_tags">Accessory Tags Total: 2,171:</label>
-	    <label for="generate_tags">Poses Tags Total: 1075:</label>
-	    <label for="generate_tags">Backgrounds Tags Total: 1030:</label>
-		<label for="generate_tags">NSFW Tags Total: 1,000:</label>
-		<label for="generate_tags">Hair Tags Total: 700:</label>
-		<label for="generate_tags">Meta Tags Total: 618:</label>
-	    <label for="generate_tags">Age Tags Total: 395:</label>
-	    <label for="generate_tags">civitAI-Prompt Total: 301:</label>
-	    <label for="generate_tags">Lighting Total: 220:</label>
         </form>
     <div class="container">
         <div class="tags-container">
@@ -320,6 +311,16 @@
         <label for="mixed-Poses">Poses</label>
         <input type="range" id="Poses-slider" name="Poses-slider" min="1" max="1" value="1">
     </div>
+	<div class="checkbox-group">
+        <input type="checkbox" id="mixed-Tattoos" name="mixed-Tattoos">
+        <label for="mixed-Tattoos">Tattoos</label>
+        <input type="range" id="Tattoos-slider" name="Tattoos-slider" min="1" max="1" value="1">
+    </div>
+	<div class="checkbox-group">
+        <input type="checkbox" id="mixed-Quality" name="mixed-Quality">
+        <label for="mixed-Quality">Quality</label>
+        <input type="range" id="Quality-slider" name="Quality-slider" min="1" max="5" value="1">
+    </div>
 	    <div class="checkbox-group">
         <input type="checkbox" id="mixed-meta" name="mixed-meta">
         <label for="mixed-meta">meta</label>
@@ -364,6 +365,8 @@
 	    mixedTagsOptions['Poses'] = $('#mixed-Poses').is(":checked") ? $('#Poses-slider').val() : 0;
 		mixedTagsOptions['Lighting'] = $('#mixed-Lighting').is(":checked") ? $('#Lighting-slider').val() : 0;
 		mixedTagsOptions['Backgrounds'] = $('#mixed-Backgrounds').is(":checked") ? $('#Backgrounds-slider').val() : 0;
+	    mixedTagsOptions['Tattoos'] = $('#mixed-Tattoos').is(":checked") ? $('#Tattoos-slider').val() : 0;
+		mixedTagsOptions['Quality'] = $('#mixed-Quality').is(":checked") ? $('#Quality-slider').val() : 0;
 	mixedTagsOptions['undanbooru_tags'] = $('#undanbooru_tags').is(":checked") ? 1 : 0;  // Add 
     // Add similar lines for other categories
     console.log(mixedTagsOptions);

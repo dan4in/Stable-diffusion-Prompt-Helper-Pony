@@ -25,7 +25,15 @@ tags = {
     'Poses': read_tags_from_file('Poses'),
     'Backgrounds': read_tags_from_file('Backgrounds'),
     'Lighting': read_tags_from_file('Lighting'),
+    'Quality': read_tags_from_file('Quality'),
+    'Tattoos': read_tags_from_file('Tattoos'),
 }
+
+tag_counts = {category: len(tags_list) for category, tags_list in tags.items()}
+total_tags = sum(tag_counts.values())
+# Sort the tag_counts dictionary by count in descending order
+sorted_tag_counts = dict(sorted(tag_counts.items(), key=lambda item: item[1], reverse=True))
+
 def generate_words(num_words, pony_options, category, clean_tags=False):
     selected_words = random.sample(tags[category], min(num_words, len(tags[category])))
     
@@ -55,7 +63,7 @@ def generate_words(num_words, pony_options, category, clean_tags=False):
     if pony_options.get('rating_questionable', False):
         result += ', rating_questionable'
     if pony_options.get('rating_realistic', False):
-        result += ', score_hyper-realistic, realistic, ((Full Body:1.2)),Highly detailed RAW color Photo, toned body, ( ( (MASTERPIECE) ) ), ( ( (full body1.2) ) ), ( ( (wide angle) ) ),realistic eyes, detailed expression, wonderful, yellowish eyes, blushing, nose piercing, long eyelash, blue left eye, detailed pupils, detailed eyebrow, detailed lashes, detailed nose, detailed lips), dynamic lights, cinematic lighting, EMBEDDED GEMS, GLOW EYES, (highly detailed, hyperdetailed, intricate), (bloom:0.7), particle effects, raytracing, cinematic lighting, shallow depth of field, photographed on a Sony a9 II, 50mm wide angle lens, sharp focus, cinematic film still'
+        result += ', score_hyper-realistic, realistic, ((Full Body:1.2))'
     
     # Include selected source options
     for word, selected in pony_options.items():
@@ -81,6 +89,7 @@ def index():
     result = ''
     characters_result = ''
     form_values = {}
+    mixed_tags_result = {}
     
     if request.method == 'POST':
         num_words = int(request.form['num_words'])
@@ -93,7 +102,9 @@ def index():
         
         form_values = request.form
 
-    return render_template('index.html', result=result, characters_result=characters_result, form_values=form_values)
+    sorted_tag_counts = dict(sorted(tag_counts.items(), key=lambda item: item[1], reverse=True))
+
+    return render_template('index.html', result=result, characters_result=characters_result, form_values=form_values, tags=tags, mixed_tags_result=mixed_tags_result, tag_counts=sorted_tag_counts, total_tags=total_tags)
    
 @app.route('/generate-random-values', methods=['GET'])
 def generate_random_values():
@@ -126,7 +137,7 @@ def generate_mixed_tags():
 
 @app.route('/')
 def static_image():
-    return render_template('index.html')
+    return render_template('index.html', mixed_tags_result=cleaned_tags_result, form_values=request.form, tags=tags, tag_counts=sorted_tag_counts, total_tags=total_tags)
 
 
 if __name__ == '__main__':
