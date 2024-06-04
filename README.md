@@ -1,10 +1,10 @@
 **Things working on 
 1.  ✅Adding more tags 100%done
 2.  ✅Adding characters only suggestion's
-3.  ✅seperating Tags SFW/NSFW in a special toggle/button 99%done
-4. sending to webui TXT2Image 0%
+3.  ✅seperating Tags SFW/NSFW in a special toggle/button 99% done
 5.  ✅Fully offline
-6.  ✅Adding seperate categories 99%done
+6.  ✅Adding seperate categories 99% done
+7.  4. sending to webui TXT2Image 0% still working on it - dont get your hopes up for this tho :/
 
 video https://youtu.be/oa2t9uwrSKA
    .previews
