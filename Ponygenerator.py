@@ -6,7 +6,7 @@ import datetime
 app = Flask(__name__)
 
 def read_tags_from_file(filename):
-    with open(filename, 'r') as file:
+    with open('data/' + filename, 'r') as file:  # Prepend 'data/' to the filename
         return [tag.strip() for tag in file]
 
 # Read tags from the text files
@@ -27,6 +27,17 @@ tags = {
     'Lighting': read_tags_from_file('Lighting'),
     'Quality': read_tags_from_file('Quality'),
     'Tattoos': read_tags_from_file('Tattoos'),
+    'Emotions_Expressions': read_tags_from_file('Emotions_Expressions'),
+    'Environment_Setting': read_tags_from_file('Environment_Setting'),
+    'Season': read_tags_from_file('Season'),
+    'Weather': read_tags_from_file('Weather'),
+    'Themes': read_tags_from_file('Themes'),
+    'Body_Types': read_tags_from_file('Body_Types'),
+    'clothing_materials': read_tags_from_file('clothing_materials'),
+    'Ethnicity_Nationality': read_tags_from_file('Ethnicity_Nationality'),
+    'Perspective': read_tags_from_file('Perspective'),
+    'Animals_Creatures': read_tags_from_file('Animals_Creatures'),
+    'Props_Objects': read_tags_from_file('Props_Objects'),
 }
 
 tag_counts = {category: len(tags_list) for category, tags_list in tags.items()}

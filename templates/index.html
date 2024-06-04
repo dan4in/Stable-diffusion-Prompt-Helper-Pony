@@ -131,6 +131,10 @@
 <img src="{{ url_for('static', filename='images/header.png') }}" alt="Header Image">
 
 
+<div style="position: relative; min-height: 20px;">
+    <!-- Your other content goes here -->
+    <img src="{{ url_for('static', filename='images/happydance.gif') }}" alt="Header Image" style="position: absolute; bottom: 0;">
+</div>
 
     <h1>♥ Random Danbooru Tags Generator ♥</h1>
 	<h3>Note: The tags contain some "NSFW" use with caution 😜<h3>
@@ -164,6 +168,17 @@
 		<option value="Quality">Quality</option>
 		<option value="Tattoos">Tattoos</option>
 		<option value="meta">Meta</option>
+		<option value="Emotions_Expressions">Emotions Expressions</option>
+		<option value="Environment_Setting">Environment Setting</option>
+		<option value="Ethnicity_Nationality">Ethnicity Nationality</option>
+		<option value="Animals_Creatures">Animals Creatures</option>
+		<option value="clothing_materials">Clothing Materials</option>
+		<option value="Props_Objects">Props Objects</option>
+		<option value="Body_Types">Body Types</option>
+		<option value="Perspective">Perspective</option>
+		<option value="Themes">Themes</option>
+		<option value="Weather">Weather</option>
+		<option value="Season">Season</option>
     </select>
 	
 				    <label for="generate_character">Pony models scores checkboxes:</label>
@@ -254,7 +269,7 @@
     <div class="checkbox-group">
         <input type="checkbox" id="mixed-general" name="mixed-general">
         <label for="mixed-general">General</label>
-        <input type="range" id="general-slider" name="general-slider" min="1" max="5" value="1">
+        <input type="range" id="general-slider" name="general-slider" min="1" max="15" value="1">
     </div>
     <div class="checkbox-group">
         <input type="checkbox" id="mixed-characters" name="mixed-characters">
@@ -263,32 +278,47 @@
     </div>
 	    <div class="checkbox-group">
         <input type="checkbox" id="mixed-clothes" name="mixed-clothes">
-        <label for="mixed-clothes">clothes</label>
+        <label for="mixed-clothes">Clothes</label>
         <input type="range" id="clothes-slider" name="clothes-slider" min="1" max="5" value="1">
+    </div>
+	 <div class="checkbox-group">
+        <input type="checkbox" id="mixed-clothing_materials" name="mixed-clothing_materials">
+        <label for="mixed-clothing_materials">Clothing Materials</label>
+        <input type="range" id="clothing_materials-slider" name="clothing_materials-slider" min="1" max="2" value="1">
     </div>
 	    <div class="checkbox-group">
         <input type="checkbox" id="mixed-accessory" name="mixed-accessory">
-        <label for="mixed-accessory">accessory</label>
+        <label for="mixed-accessory">Accessory</label>
         <input type="range" id="accessory-slider" name="accessory-slider" min="1" max="5" value="1">
+    </div>
+	<div class="checkbox-group">
+        <input type="checkbox" id="mixed-Ethnicity_Nationality" name="mixed-Ethnicity_Nationality">
+        <label for="mixed-Ethnicity_Nationality">Ethnicity/Nationality</label>
+        <input type="range" id="Ethnicity_Nationality-slider" name="Ethnicity_Nationality-slider" min="1" max="1" value="1">
+    </div>
+	<div class="checkbox-group">
+        <input type="checkbox" id="mixed-Emotions_Expressions" name="mixed-Emotions_Expressions">
+        <label for="mixed-Emotions_Expressions">Emotions/Expressions</label>
+        <input type="range" id="Emotions_Expressions-slider" name="Emotions_Expressions-slider" min="1" max="2" value="1">
     </div>
 	    <div class="checkbox-group">
         <input type="checkbox" id="mixed-copyright" name="mixed-copyright">
-        <label for="mixed-copyright">copyright</label>
+        <label for="mixed-copyright">Copyright</label>
         <input type="range" id="copyright-slider" name="copyright-slider" min="1" max="5" value="1">
     </div>
 	    <div class="checkbox-group">
         <input type="checkbox" id="mixed-artist" name="mixed-artist">
-        <label for="mixed-artist">artist</label>
+        <label for="mixed-artist">Artist</label>
         <input type="range" id="artist-slider" name="artist-slider" min="1" max="5" value="1">
     </div>
 	    <div class="checkbox-group">
         <input type="checkbox" id="mixed-nsfw" name="mixed-nsfw">
-        <label for="mixed-nsfw">nsfw</label>
+        <label for="mixed-nsfw">NSFW</label>
         <input type="range" id="nsfw-slider" name="nsfw-slider" min="1" max="5" value="1">
     </div>
 	    <div class="checkbox-group">
         <input type="checkbox" id="mixed-hair" name="mixed-hair">
-        <label for="mixed-hair">hair</label>
+        <label for="mixed-hair">HAIR</label>
         <input type="range" id="hair-slider" name="hair-slider" min="1" max="5" value="1">
     </div>
 	    <div class="checkbox-group">
@@ -301,6 +331,11 @@
         <label for="mixed-Backgrounds">Backgrounds</label>
         <input type="range" id="Backgrounds-slider" name="Backgrounds-slider" min="1" max="1" value="1">
     </div>
+		<div class="checkbox-group">
+        <input type="checkbox" id="mixed-Environment_Setting" name="mixed-Environment_Setting">
+        <label for="mixed-Environment_Setting">Environment/Setting</label>
+        <input type="range" id="Environment_Setting-slider" name="Environment_Setting-slider" min="1" max="2" value="1">
+    </div>
 	 <div class="checkbox-group">
         <input type="checkbox" id="mixed-Lighting" name="mixed-Lighting">
         <label for="mixed-Lighting">Lighting</label>
@@ -310,6 +345,31 @@
         <input type="checkbox" id="mixed-Poses" name="mixed-Poses">
         <label for="mixed-Poses">Poses</label>
         <input type="range" id="Poses-slider" name="Poses-slider" min="1" max="1" value="1">
+    </div>
+	 <div class="checkbox-group">
+        <input type="checkbox" id="mixed-Weather" name="mixed-Weather">
+        <label for="mixed-Weather">Weather</label>
+        <input type="range" id="Weather-slider" name="Weather-slider" min="1" max="1" value="1">
+    </div>
+	 <div class="checkbox-group">
+        <input type="checkbox" id="mixed-Season" name="mixed-Season">
+        <label for="mixed-Season">Season</label>
+        <input type="range" id="Season-slider" name="Season-slider" min="1" max="1" value="1">
+    </div>
+	 <div class="checkbox-group">
+        <input type="checkbox" id="mixed-Themes" name="mixed-Themes">
+        <label for="mixed-Themes">Themes</label>
+        <input type="range" id="Themes-slider" name="Themes-slider" min="1" max="2" value="1">
+    </div>
+	<div class="checkbox-group">
+        <input type="checkbox" id="mixed-Perspective" name="mixed-Perspective">
+        <label for="mixed-Perspective">Perspective</label>
+        <input type="range" id="Perspective-slider" name="Themes-slider" min="1" max="2" value="1">
+    </div>
+	<div class="checkbox-group">
+        <input type="checkbox" id="mixed-Body_Types" name="mixed-Body_Types">
+        <label for="mixed-Body_Types">Body Types</label>
+        <input type="range" id="Body_Types-slider" name="Body_Types-slider" min="1" max="1" value="1">
     </div>
 	<div class="checkbox-group">
         <input type="checkbox" id="mixed-Tattoos" name="mixed-Tattoos">
@@ -321,16 +381,29 @@
         <label for="mixed-Quality">Quality</label>
         <input type="range" id="Quality-slider" name="Quality-slider" min="1" max="5" value="1">
     </div>
+	<div class="checkbox-group">
+        <input type="checkbox" id="mixed-Props_Objects" name="mixed-Props_Objects">
+        <label for="mixed-Props_Objects">Props/Objects</label>
+        <input type="range" id="Props_Objects-slider" name="Props_Objects-slider" min="1" max="5" value="1">
+    </div>
+	<div class="checkbox-group">
+        <input type="checkbox" id="mixed-Animals_Creatures" name="mixed-Animals_Creatures">
+        <label for="mixed-Animals_Creatures">Animals/Creatures/Objects</label>
+        <input type="range" id="Animals_Creatures-slider" name="Animals_Creatures-slider" min="1" max="5" value="1">
+    </div>
 	    <div class="checkbox-group">
         <input type="checkbox" id="mixed-meta" name="mixed-meta">
-        <label for="mixed-meta">meta</label>
+        <label for="mixed-meta">Meta</label>
         <input type="range" id="meta-slider" name="meta-slider" min="1" max="5" value="1">
     </div>
 
     <!-- Repeat for other categories -->
 </div>
 			<h2>"Some sliders only limited to 1 or 2"</h2>
-			<h5>General Negative Prompt: boring,text,signature,logo,watermark,low quality, bad quality, loose artifacts, grainy, blurry, long neck, closed eyes, (worst quality, low quality:1.3), bad-hands-5, badhandv4, epiCNegative, makeup, mole under eye, mole, logo, watermark, text, divine, God, Goddess, deity, (monochrome:1.3), (oversaturated:1.3), bad hands, lowers, 3d render, cartoon, long body, ((blurry)), duplicate, ((duplicate body parts)), (disfigured), (poorly drawn), (extra limbs), fused fingers, extra fingers, (twisted), malformed hands, ((((mutated hands and fingers)))), contorted, conjoined, ((missing limbs)), logo, signature, text, words, low res, boring, mutated, artifacts, bad art, gross, ugly, poor quality, low quality, missing asshole, missing legs, limbless, severed limbs, severed parts, legless, without hands, disabled, anime, cartoonish, 3dmax</h4>
+			<h4 style="text-align:center; color:red;">"Some General Negative Prompts feel free to edit them as Needed": <span style="color:black; font-size:15px;">anime, cartoon, child, loli(nipples:1.2), EasyNegative, paintings, sketches, (worst quality:2), (low quality:2), (normal quality:2), lowres, normal quality, (monochrome:1.21), (grayscale:1.21), skin spots, acnes, skin blemishes, age spot, glans, extra fingers, fewer fingers, strange fingers, bad hand, badfoots, three legs, wrong hand, wrong feet, wrong fingers, deformed leg, more than 2 legslowres, badanatomy, badhands, badfoots, wrong, badfingers, text, error, missingfingers, extradigit, fewerdigits, cropped, worstquality, lowquality, normalquality, jpegartifacts, signature, watermark, usemame, blury, badfeet, futa, futanari, small penis, yaoi, huge breasts, large breasts, three legs, wrong hand, wrong feet, wrong fingers, deformed leg, abnormal, malformation,, (worst quality, low quality:1.3), bad-hands-5, badhandv4, epiCNegative, makeup, mole under eye, mole, logo, watermark, text, divine, God, Goddess, deity, (monochrome:1.3), (oversaturated:1.3), bad hands, lowers, 3d render, cartoon, long body, ((blurry)), duplicate, ((duplicate body parts)), (disfigured), (poorly drawn), (extra limbs), fused fingers, extra fingers, (twisted), malformed hands, ((((mutated hands and fingers)))), contorted, conjoined, ((missing limbs)), logo, signature, text, words, low res, boring, mutated, artifacts, bad art, gross, ugly, poor quality, low quality, missing asshole, missing legs, limbless, severed limbs, severed parts, legless, without hands, disabled, anime, cartoonish, 3dmax</span></h4>
+				
+				<h3 id="special-heading">♥FEEL FREE TO STAR THE PROJECT IF YOU FOUND IT HELPFUL♥</h3>
+    <img src="{{ url_for('static', filename='images/009eb26339209748c0c2e98f4e40ce1e1c88f2ac.gif') }}" alt="Header Image" id="special-heading"
 
         </div>
     </div>
@@ -367,6 +440,17 @@
 		mixedTagsOptions['Backgrounds'] = $('#mixed-Backgrounds').is(":checked") ? $('#Backgrounds-slider').val() : 0;
 	    mixedTagsOptions['Tattoos'] = $('#mixed-Tattoos').is(":checked") ? $('#Tattoos-slider').val() : 0;
 		mixedTagsOptions['Quality'] = $('#mixed-Quality').is(":checked") ? $('#Quality-slider').val() : 0;
+		mixedTagsOptions['Emotions_Expressions'] = $('#mixed-Emotions_Expressions').is(":checked") ? $('#Emotions_Expressions-slider').val() : 0;
+		mixedTagsOptions['Environment_Setting'] = $('#mixed-Environment_Setting').is(":checked") ? $('#Environment_Setting-slider').val() : 0;
+		mixedTagsOptions['Season'] = $('#mixed-Season').is(":checked") ? $('#Season-slider').val() : 0;
+		mixedTagsOptions['Weather'] = $('#mixed-Weather').is(":checked") ? $('#Weather-slider').val() : 0;
+		mixedTagsOptions['Ethnicity_Nationality'] = $('#mixed-Ethnicity_Nationality').is(":checked") ? $('#Ethnicity_Nationality-slider').val() : 0;
+		mixedTagsOptions['Themes'] = $('#mixed-Themes').is(":checked") ? $('#Themes-slider').val() : 0;
+		mixedTagsOptions['Body_Types'] = $('#mixed-Body_Types').is(":checked") ? $('#Body_Types-slider').val() : 0;
+		mixedTagsOptions['Props_Objects'] = $('#mixed-Props_Objects').is(":checked") ? $('#Props_Objects-slider').val() : 0;
+		mixedTagsOptions['Perspective'] = $('#mixed-Perspective').is(":checked") ? $('#Perspective-slider').val() : 0;
+		mixedTagsOptions['Animals_Creatures'] = $('#mixed-Animals_Creatures').is(":checked") ? $('#Animals_Creatures-slider').val() : 0;
+		mixedTagsOptions['clothing_materials'] = $('#mixed-clothing_materials').is(":checked") ? $('#clothing_materials-slider').val() : 0;
 	mixedTagsOptions['undanbooru_tags'] = $('#undanbooru_tags').is(":checked") ? 1 : 0;  // Add 
     // Add similar lines for other categories
     console.log(mixedTagsOptions);
