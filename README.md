@@ -4,7 +4,7 @@
 3.  ✅seperating Tags SFW/NSFW in a special toggle/button 99% done
 5.  ✅Fully offline
 6.  ✅Adding seperate categories 99% done
-7.  4. sending to webui TXT2Image 0% still working on it - dont get your hopes up for this tho :/
+7.  ✅Sending to webui TXT2Image or image2image 100% Done - A1111 or Forge Extension v2.0.0 Found here in its own repository https://github.com/dan4in/PonyHelper
 
 video https://youtu.be/oa2t9uwrSKA
    .previews
