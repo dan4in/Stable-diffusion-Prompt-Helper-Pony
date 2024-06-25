@@ -144,16 +144,17 @@
 
     <div class="container">
         <form action="/" method="post">
-            <label for="num_words">Select Number of DanBooru Tags First:</label>
+            <label for="num_words">Select Number of Tags First:</label>
 			<h5> max "50"</h5>
             <input type="number" id="num_words" name="num_words" min="1" max="50" required value="{{ form_values.get('num_words', '') }}">
            
 		   <!-- Add a dropdown menu to select the category of tags -->
     <label for="category" id="special-heading">Category:</label>
-	              <h5> Note: Set number of tags #1 for "CivitAI" prompt</h5>
+	              <h5> Note: Set number of tags #1 for "CivitAI" or "Ideogram" prompt</h5>
     <select id="category" name="category">
         <option value="general">General</option>
 		<option value="civitAI-Prompt">civitAI-Prompt</option>
+		<option value="MagicPrompt-Ideogram">MagicPrompt Ideogram</option>
         <option value="characters">Characters</option>
         <option value="clothes">Clothes</option>
         <option value="accessory">Accessory</option>
@@ -400,7 +401,7 @@
     <!-- Repeat for other categories -->
 </div>
 			<h2>"Some sliders only limited to 1 or 2"</h2>
-			<h4 style="text-align:center; color:red;">"Some General Negative Prompts feel free to edit them as Needed": <span style="color:black; font-size:15px;">anime, cartoon, child, loli(nipples:1.2), EasyNegative, paintings, sketches, (worst quality:2), (low quality:2), (normal quality:2), lowres, normal quality, (monochrome:1.21), (grayscale:1.21), skin spots, acnes, skin blemishes, age spot, glans, extra fingers, fewer fingers, strange fingers, bad hand, badfoots, three legs, wrong hand, wrong feet, wrong fingers, deformed leg, more than 2 legslowres, badanatomy, badhands, badfoots, wrong, badfingers, text, error, missingfingers, extradigit, fewerdigits, cropped, worstquality, lowquality, normalquality, jpegartifacts, signature, watermark, usemame, blury, badfeet, futa, futanari, small penis, yaoi, huge breasts, large breasts, three legs, wrong hand, wrong feet, wrong fingers, deformed leg, abnormal, malformation,, (worst quality, low quality:1.3), bad-hands-5, badhandv4, epiCNegative, makeup, mole under eye, mole, logo, watermark, text, divine, God, Goddess, deity, (monochrome:1.3), (oversaturated:1.3), bad hands, lowers, 3d render, cartoon, long body, ((blurry)), duplicate, ((duplicate body parts)), (disfigured), (poorly drawn), (extra limbs), fused fingers, extra fingers, (twisted), malformed hands, ((((mutated hands and fingers)))), contorted, conjoined, ((missing limbs)), logo, signature, text, words, low res, boring, mutated, artifacts, bad art, gross, ugly, poor quality, low quality, missing asshole, missing legs, limbless, severed limbs, severed parts, legless, without hands, disabled, anime, cartoonish, 3dmax</span></h4>
+			<h4 style="text-align:center; color:red;">"Some General Negative Prompts Copy What you Need": <span style="color:black; font-size:15px;">anime, cartoon, child, loli(nipples:1.2), EasyNegative, paintings, sketches, (worst quality:2), (low quality:2), (normal quality:2), lowres, normal quality, (monochrome:1.21), (grayscale:1.21), skin spots, acnes, skin blemishes, age spot, glans, extra fingers, fewer fingers, strange fingers, bad hand, badfoots, three legs, wrong hand, wrong feet, wrong fingers, deformed leg, more than 2 legslowres, badanatomy, badhands, badfoots, wrong, badfingers, text, error, missingfingers, extradigit, fewerdigits, cropped, worstquality, lowquality, normalquality, jpegartifacts, signature, watermark, usemame, blury, badfeet, futa, futanari, small penis, yaoi, huge breasts, large breasts, three legs, wrong hand, wrong feet, wrong fingers, deformed leg, abnormal, malformation,, (worst quality, low quality:1.3), bad-hands-5, badhandv4, epiCNegative, makeup, mole under eye, mole, logo, watermark, text, divine, God, Goddess, deity, (monochrome:1.3), (oversaturated:1.3), bad hands, lowers, 3d render, cartoon, long body, ((blurry)), duplicate, ((duplicate body parts)), (disfigured), (poorly drawn), (extra limbs), fused fingers, extra fingers, (twisted), malformed hands, ((((mutated hands and fingers)))), contorted, conjoined, ((missing limbs)), logo, signature, text, words, low res, boring, mutated, artifacts, bad art, gross, ugly, poor quality, low quality, missing asshole, missing legs, limbless, severed limbs, severed parts, legless, without hands, disabled, anime, cartoonish, 3dmax,_____________."shorter version"= lowres, error, cropped, worst quality, low quality, jpeg artifacts, out of frame, watermark, signature, deformed, ugly, mutilated, disfigured, text, extra limbs, face cut, head cut, extra fingers, extra arms, poorly drawn face, mutation, bad proportions, cropped head, malformed limbs, mutated hands, fused fingers, long neck, illustration, painting, drawing, art, sketch, nude, naked</span></h4>
 				
 				<h3 id="special-heading">♥FEEL FREE TO STAR THE PROJECT IF YOU FOUND IT HELPFUL♥</h3>
     <img src="{{ url_for('static', filename='images/009eb26339209748c0c2e98f4e40ce1e1c88f2ac.gif') }}" alt="Header Image" id="special-heading"

@@ -1,13 +1,40 @@
 from flask import Flask, render_template, request, jsonify
 import random
 import datetime
-
+import chardet
+import os
 
 app = Flask(__name__)
 
+# Directory of the current script
+base_dir = os.path.dirname(__file__)
+# Directory where data files are expected to be stored
+data_dir = os.path.join(base_dir, 'Data')
+
+def find_file_in_directory(filename, search_directory):
+    """Recursively search for a file in a directory."""
+    for root, _, files in os.walk(search_directory):
+        if filename in files:
+            return os.path.join(root, filename)
+    return None
+
 def read_tags_from_file(filename):
-    with open('data/' + filename, 'r') as file:  # Prepend 'data/' to the filename
-        return [tag.strip() for tag in file]
+    # First, check in the data directory
+    filepath = os.path.join(data_dir, filename)
+    if not os.path.exists(filepath):
+        # If not found, search in the entire PonyHelper directory
+        pony_helper_dir = os.path.dirname(base_dir)
+        filepath = find_file_in_directory(filename, pony_helper_dir)
+        if not filepath:
+            print(f"Warning: No such file: '{filename}' in the PonyHelper directory")
+            return []
+    # Open the file with utf-8 encoding
+    try:
+        with open(filepath, 'r', encoding='utf-8') as file:
+            return [tag.strip() for tag in file]
+    except UnicodeDecodeError:
+        print(f"Error: Cannot decode the file '{filename}' with utf-8 encoding")
+        return []
 
 # Read tags from the text files
 tags = {
@@ -38,6 +65,7 @@ tags = {
     'Perspective': read_tags_from_file('Perspective'),
     'Animals_Creatures': read_tags_from_file('Animals_Creatures'),
     'Props_Objects': read_tags_from_file('Props_Objects'),
+    'MagicPrompt-Ideogram': read_tags_from_file('MagicPrompt-Ideogram'),
 }
 
 tag_counts = {category: len(tags_list) for category, tags_list in tags.items()}
