@@ -16,8 +16,12 @@ have fun exploring tags/prompts with interesting/weird combinations to use with 
 6.  ✅Adding seperate categories 99% done
 7.  ✅Sending to webui TXT2Image or image2image 100% Done - A1111 or Forge Extension v2.0.0 Found here in its own repository https://github.com/dan4in/PonyHelper
 
-![Charakter_Cicero-4013416703](https://github.com/dan4in/Stable-diffusion-Prompt-Helper-Pony/assets/53431991/7e602cc2-31d1-410d-bf63-b4b4b5b69eb6)
-https://github.com/dan4in/Stable-diffusion-Prompt-Helper-Pony/assets/53431991/efd682cf-bba5-4ffa-80f5-edef8302d1d4
+
+![Charakter_Cicero-4013416703](https://github.com/dan4in/Stable-diffusion-Prompt-Helper-Pony/assets/53431991/9e4d0d3a-8169-4dc5-955f-5c1132a7c36f)
+
+
+https://github.com/dan4in/Stable-diffusion-Prompt-Helper-Pony/assets/53431991/5de518e5-20c8-42b7-92de-8d82ac6289f2
+
 
 
 video https://youtu.be/5jxlOfHOy0M
