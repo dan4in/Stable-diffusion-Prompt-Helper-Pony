@@ -26,6 +26,52 @@ https://github.com/dan4in/Stable-diffusion-Prompt-Helper-Pony/assets/53431991/5d
 
 video https://youtu.be/5jxlOfHOy0M
  
+
+### Adding Custom Data
+
+To add your own data and tags, follow these steps:
+
+1. **Create Your Data File**:
+   - Create a text file with your tags, each on a new line.
+   - Name the file `YourDATA.txt` (replace `YourDATA` with your desired name).
+   - Remove the `.txt` extension after you’re done.
+
+2. **Modify the Script**:
+   - Open `Ponygenerator.py` and add the following lines to read your new tags:
+Line 48
+     ```python
+     # Read tags from the text files
+     tags = {
+         'YourDATA': read_tags_from_file('YourDATA'),
+     }
+     ```
+
+3. **Update the HTML**:
+   - In `example.html`, add a new line at line 155:
+
+     ```html
+     <option value="YourDATA">YourDATA</option>
+     ```
+
+   - Add a new section at line 269:
+
+     ```html
+     <div class="checkbox-group">
+         <input type="checkbox" id="mixed-YourDATA" name="mixed-YourDATA">
+         <label for="mixed-YourDATA">YourDATA</label>
+         <input type="range" id="YourDATA-slider" name="YourDATA-slider" min="1" max="15" value="1">
+     </div>
+     ```
+
+4. **Update the JavaScript**:
+   - In your JavaScript file, add a new line at line 429:
+
+     ```javascript
+     mixedTagsOptions['YourDATA'] = $('#mixed-YourDATA').is(":checked") ? $('#YourDATA-slider').val() : 0;
+     ```
+
+
+
 previews:
    
 score_9, score_8_up, score_7_up, score_6_up, score_5_up, score_4_up, nontraditional_miko, against_wall, kongou_(kancolle), dark_skin, black_nails, silk, rating_safe
